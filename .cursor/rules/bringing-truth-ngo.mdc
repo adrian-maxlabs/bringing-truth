@@ -1,0 +1,46 @@
+---
+description: BringingTruth NGO site — architecture, Supabase, security, and folder conventions from docs/bringingtruth-ngo-site-plan.md
+alwaysApply: true
+---
+
+# BringingTruth NGO conventions
+
+## Source of truth
+
+- Implement features per `docs/bringingtruth-ngo-site-plan.md`.
+- Before Next.js APIs, layout, or routing: read `node_modules/next/dist/docs/` and heed deprecations (see `AGENTS.md`).
+
+## Architecture
+
+- **Public:** Server Components fetch **published** content via Supabase under read-only RLS.
+- **Admin:** `/admin/*` — gate with middleware or layout + session + `admin` role; **mutations only in Server Actions** after auth.
+- **API routes:** avoid `src/app/api/` except future webhooks; no CRUD REST for CMS by default.
+
+## Folder shape
+
+- `src/app/` — marketing routes, `updates`, `contact`, `admin`.
+- `src/features/marketing/` — reusable public sections.
+- `src/features/cms/` — admin CRUD and shared CMS helpers.
+- `src/lib/supabase/` — use `createClient()` from `server.ts` (SSR/actions) or `client.ts` (browser).
+- `src/types/` — `Database` types for Supabase (e.g. `supabase.ts`).
+
+## Supabase and security
+
+- **RLS** on every table; Storage policies for uploads; small team uses an `admin` role for writes.
+- Use typed clients from `src/lib/supabase/` only — no parallel untyped Supabase clients.
+- **Zod** every Server Action input; never rely on client-only validation.
+- Never expose service-role or other secrets to the browser.
+
+## Data model (align migrations with the plan)
+
+- `site_settings` or `organization_profile`, `posts`, `mission_highlights`, `testimonies`, `contact_submissions`.
+
+## Product
+
+- **Donations:** `NEXT_PUBLIC_DONATION_URL` (external); keep separate from contact.
+- **SEO:** `metadata`, `sitemap.ts`, `robots.ts` on public routes.
+
+## Do / don’t
+
+- **Do:** `import { createClient } from "@/lib/supabase/server"` in actions + Zod + role check, then write.
+- **Don’t:** add `app/api` routes for CMS mutations; bypass RLS with service role for normal requests.
