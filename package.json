@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:env": "node scripts/check-env.mjs",
+    "db:push": "node scripts/supabase-remote-push.mjs",
+    "seed:admin": "node scripts/seed-admin.mjs",
+    "verify:admin": "node scripts/verify-admin-login.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",

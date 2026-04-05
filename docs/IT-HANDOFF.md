@@ -7,7 +7,7 @@ This document is for **internal staff** who update the public website without ed
 | Where | What to set |
 |-------|-------------|
 | **Vercel** (hosting) | Project → Settings → Environment Variables: same keys as `.env.example` in the repo. |
-| **Supabase** (database & login) | Project URL and anon key power the site; Auth powers `/admin` sign-in. |
+| **Supabase** (database & login) | Project URL and anon key power the site; Auth powers `/admin` sign-in. Developers: first-time project setup is in **[connect-supabase.md](./connect-supabase.md)**. |
 
 Important variables:
 
@@ -18,16 +18,8 @@ Important variables:
 ## 2. First-time admin setup (developer / one-time)
 
 1. Run SQL migrations in `supabase/migrations/` on your Supabase project (CLI or SQL editor).
-2. In **Authentication → Users**, create a user (email + password) or invite them.
-3. Grant **admin** in the database:
-
-```sql
-insert into public.profiles (id, role)
-values ('<paste-auth-user-uuid-here>', 'admin')
-on conflict (id) do update set role = excluded.role;
-```
-
-4. Keep **public sign-up disabled** if you only want invited staff (Authentication → Providers / policies).
+2. Create the admin login and grant **admin** — follow **[setup-admin-account.md](./setup-admin-account.md)** (or run `supabase/snippets/grant-admin-by-email.sql` after adding the user in **Authentication → Users**).
+3. Keep **public sign-up disabled** if you only want invited staff (Authentication → Providers / policies).
 
 ## 3. Daily use — content
 

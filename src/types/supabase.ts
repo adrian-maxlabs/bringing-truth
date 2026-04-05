@@ -166,6 +166,45 @@ export type Database = {
         };
         Relationships: [];
       };
+      scripture_banners: {
+        Row: {
+          id: string;
+          anchor_slug: string;
+          sort_order: number;
+          reference: string;
+          translation_note: string;
+          body: string;
+          tone: "light" | "deep";
+          published: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          anchor_slug: string;
+          sort_order?: number;
+          reference?: string;
+          translation_note?: string;
+          body?: string;
+          tone?: "light" | "deep";
+          published?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          anchor_slug?: string;
+          sort_order?: number;
+          reference?: string;
+          translation_note?: string;
+          body?: string;
+          tone?: "light" | "deep";
+          published?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       contact_submissions: {
         Row: {
           id: string;

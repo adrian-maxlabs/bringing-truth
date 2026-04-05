@@ -492,3 +492,144 @@ export async function deleteTestimony(formData: FormData): Promise<void> {
   revalidatePath("/admin/testimonies");
   redirect("/admin/testimonies");
 }
+
+const anchorSlugSchema = z
+  .string()
+  .trim()
+  .min(1)
+  .max(200)
+  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Use lowercase letters, numbers, and single hyphens.");
+
+const scriptureSchema = z.object({
+  anchor_slug: anchorSlugSchema,
+  reference: z.string().trim().min(1).max(200),
+  translation_note: z.string().trim().max(100).optional(),
+  body: z.string().trim().min(1).max(8000),
+  sort_order: z.coerce.number().int().min(0).max(999_999),
+  tone: z.enum(["light", "deep"]),
+  published: z.enum(["on"]).optional(),
+});
+
+export async function createScripture(
+  _prev: { ok?: boolean; error?: string },
+  formData: FormData
+) {
+  const gate = await getAdminClient();
+  if (!gate.supabase) {
+    return { ok: false, error: gate.error };
+  }
+
+  let anchorSlug = String(formData.get("anchor_slug") ?? "").trim();
+  const reference = String(formData.get("reference") ?? "").trim();
+  if (!anchorSlug && reference) {
+    anchorSlug = slugify(`scripture-${reference}`);
+  }
+  if (!anchorSlug) {
+    return { ok: false, error: "Add an anchor slug or reference." };
+  }
+
+  const parsed = scriptureSchema.safeParse({
+    anchor_slug: anchorSlug,
+    reference: formData.get("reference"),
+    translation_note: String(formData.get("translation_note") ?? "").trim() || "ESV",
+    body: formData.get("body"),
+    sort_order: formData.get("sort_order"),
+    tone: formData.get("tone") === "deep" ? "deep" : "light",
+    published: formData.get("published"),
+  });
+
+  if (!parsed.success) {
+    return { ok: false, error: parsed.error.flatten().formErrors.join(", ") };
+  }
+
+  const { error } = await gate.supabase.from("scripture_banners").insert({
+    anchor_slug: parsed.data.anchor_slug,
+    reference: parsed.data.reference,
+    translation_note: parsed.data.translation_note ?? "ESV",
+    body: parsed.data.body,
+    sort_order: parsed.data.sort_order,
+    tone: parsed.data.tone,
+    published: parsed.data.published === "on",
+  });
+
+  if (error) {
+    return { ok: false, error: error.message };
+  }
+
+  revalidatePath("/");
+  revalidatePath("/admin/scriptures");
+  redirect("/admin/scriptures");
+}
+
+export async function updateScripture(
+  _prev: { ok?: boolean; error?: string },
+  formData: FormData
+) {
+  const gate = await getAdminClient();
+  if (!gate.supabase) {
+    return { ok: false, error: gate.error };
+  }
+
+  const id = String(formData.get("id") ?? "").trim();
+  if (!id) {
+    return { ok: false, error: "Missing id." };
+  }
+
+  const parsed = scriptureSchema.safeParse({
+    anchor_slug: formData.get("anchor_slug"),
+    reference: formData.get("reference"),
+    translation_note: String(formData.get("translation_note") ?? "").trim() || "ESV",
+    body: formData.get("body"),
+    sort_order: formData.get("sort_order"),
+    tone: formData.get("tone") === "deep" ? "deep" : "light",
+    published: formData.get("published"),
+  });
+
+  if (!parsed.success) {
+    return { ok: false, error: parsed.error.flatten().formErrors.join(", ") };
+  }
+
+  const { error } = await gate.supabase
+    .from("scripture_banners")
+    .update({
+      anchor_slug: parsed.data.anchor_slug,
+      reference: parsed.data.reference,
+      translation_note: parsed.data.translation_note ?? "ESV",
+      body: parsed.data.body,
+      sort_order: parsed.data.sort_order,
+      tone: parsed.data.tone,
+      published: parsed.data.published === "on",
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", id);
+
+  if (error) {
+    return { ok: false, error: error.message };
+  }
+
+  revalidatePath("/");
+  revalidatePath("/admin/scriptures");
+  redirect("/admin/scriptures");
+}
+
+export async function deleteScripture(formData: FormData): Promise<void> {
+  const gate = await getAdminClient();
+  if (!gate.supabase) {
+    return;
+  }
+
+  const id = String(formData.get("id") ?? "").trim();
+  if (!id) {
+    return;
+  }
+
+  const { error } = await gate.supabase.from("scripture_banners").delete().eq("id", id);
+
+  if (error) {
+    return;
+  }
+
+  revalidatePath("/");
+  revalidatePath("/admin/scriptures");
+  redirect("/admin/scriptures");
+}

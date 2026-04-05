@@ -4,6 +4,7 @@ type Profile = Database["public"]["Tables"]["organization_profile"]["Row"];
 type Post = Database["public"]["Tables"]["posts"]["Row"];
 type Highlight = Database["public"]["Tables"]["mission_highlights"]["Row"];
 type Testimony = Database["public"]["Tables"]["testimonies"]["Row"];
+type ScriptureBanner = Database["public"]["Tables"]["scripture_banners"]["Row"];
 
 /** Mirrors seed SQL so the POC looks complete before Supabase is connected. */
 export const demoOrganizationProfile: Profile = {
@@ -78,6 +79,57 @@ export const demoHighlights: Highlight[] = [
     sort_order: 3,
     published: true,
     created_at: new Date().toISOString(),
+  },
+];
+
+export const demoScriptureBanners: ScriptureBanner[] = [
+  {
+    id: "00000000-0000-4000-8000-000000000401",
+    anchor_slug: "scripture-jesus-is-truth",
+    sort_order: 1,
+    reference: "John 14:6",
+    translation_note: "ESV",
+    body: "I am the way, and the truth, and the life. No one comes to the Father except through me.",
+    tone: "light",
+    published: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "00000000-0000-4000-8000-000000000402",
+    anchor_slug: "scripture-truth-sets-free",
+    sort_order: 2,
+    reference: "John 8:32",
+    translation_note: "ESV",
+    body: "You will know the truth, and the truth will set you free.",
+    tone: "deep",
+    published: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "00000000-0000-4000-8000-000000000403",
+    anchor_slug: "scripture-abide-and-fruit",
+    sort_order: 3,
+    reference: "John 15:5",
+    translation_note: "ESV",
+    body: "I am the vine; you are the branches. Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you can do nothing.",
+    tone: "light",
+    published: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: "00000000-0000-4000-8000-000000000404",
+    anchor_slug: "scripture-fruit-of-the-spirit",
+    sort_order: 4,
+    reference: "Galatians 5:22–23",
+    translation_note: "ESV",
+    body: "The fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self-control; against such things there is no law.",
+    tone: "deep",
+    published: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   },
 ];
 

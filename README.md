@@ -16,6 +16,12 @@ See **[docs/bringingtruth-ngo-site-plan.md](./docs/bringingtruth-ngo-site-plan.m
 
 Staff-facing steps: **[docs/IT-HANDOFF.md](./docs/IT-HANDOFF.md)** (admin login, env vars, first admin SQL).
 
+## Connect Supabase (developer)
+
+Step-by-step for a new Supabase project: **[docs/connect-supabase.md](./docs/connect-supabase.md)** (API keys, migrations, auth URLs).
+
+**First admin login:** **[docs/setup-admin-account.md](./docs/setup-admin-account.md)** — `npm run seed:admin` (service role + `SEED_ADMIN_*` in `.env.local`) or manual SQL.
+
 ## Environment
 
 Copy `.env.example` to `.env.local` and fill in values from your Supabase project (**Settings → API**):
@@ -34,7 +40,9 @@ cp .env.example .env.local
 ## Scripts
 
 ```bash
-npm run dev    # http://localhost:3000
+npm run dev       # http://localhost:3000
+npm run check:env # verify .env.local has Supabase URL + anon key (after you fill them)
+npm run db:push   # apply supabase/migrations to your linked project (needs `npx supabase login` + SUPABASE_DB_PASSWORD)
 npm run build
 npm run start
 npm run lint
@@ -52,5 +60,4 @@ Import the repo into [Vercel](https://vercel.com), add the same env vars, then p
 - `src/types/supabase.ts` — align with `supabase/migrations/` and regenerate types after schema changes
 - `supabase/migrations/` — Postgres schema + RLS + Storage policies
 - `docs/IT-HANDOFF.md` — onboarding for IT staff
-# bringing-truth
-# bringing-truth
+- `docs/connect-supabase.md` — hook up a new Supabase project (dev)

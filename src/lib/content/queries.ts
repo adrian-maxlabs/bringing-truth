@@ -4,6 +4,7 @@ import {
   demoHighlights,
   demoOrganizationProfile,
   demoPosts,
+  demoScriptureBanners,
   demoTestimonies,
 } from "@/lib/content/demo-data";
 import type { Database } from "@/types/supabase";
@@ -12,6 +13,7 @@ type Profile = Database["public"]["Tables"]["organization_profile"]["Row"];
 type Post = Database["public"]["Tables"]["posts"]["Row"];
 type Highlight = Database["public"]["Tables"]["mission_highlights"]["Row"];
 type Testimony = Database["public"]["Tables"]["testimonies"]["Row"];
+type ScriptureBanner = Database["public"]["Tables"]["scripture_banners"]["Row"];
 
 export async function getOrganizationProfile(): Promise<Profile> {
   if (!isSupabaseConfigured()) {
@@ -117,4 +119,24 @@ export async function getTestimonies(): Promise<Testimony[]> {
 export async function getHomePostTeasers(count = 2): Promise<Post[]> {
   const posts = await getPublishedPosts(count);
   return posts.slice(0, count);
+}
+
+/** Published scripture bands for the home page, ordered by `sort_order` (position 1 = first band after hero). */
+export async function getScriptureBannersForHome(): Promise<ScriptureBanner[]> {
+  if (!isSupabaseConfigured()) {
+    return demoScriptureBanners;
+  }
+
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("scripture_banners")
+    .select("*")
+    .eq("published", true)
+    .order("sort_order", { ascending: true });
+
+  if (error) {
+    return demoScriptureBanners;
+  }
+
+  return data ?? [];
 }

@@ -1,0 +1,10 @@
+# Public Supabase (anon key — never commit service role)
+NEXT_PUBLIC_SUPABASE_URL=https://jdcsrxbmqzullstktvqd.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpkY3NyeGJtcXp1bGxzdGt0dnFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzOTc4MTMsImV4cCI6MjA5MDk3MzgxM30.bDWEU4Fekgisek2HMylJ8UAPxcojTUdjt7IIhefmiL4
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpkY3NyeGJtcXp1bGxzdGt0dnFkIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTM5NzgxMywiZXhwIjoyMDkwOTczODEzfQ.SpwMBDLrymaOoRrXRMKO52m7c-tXlFgFeEzJYjZvMZw
+
+# Canonical site URL for metadata, sitemap, and robots (no trailing slash)
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
+# External donation platform (GivingFuel, Pushpay, etc.)
+NEXT_PUBLIC_DONATION_URL=

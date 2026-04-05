@@ -12,61 +12,73 @@ import {
   getHomePostTeasers,
   getMissionHighlights,
   getOrganizationProfile,
+  getScriptureBannersForHome,
   getTestimonies,
 } from "@/lib/content/queries";
 
 export default async function HomePage() {
-  const [profile, highlights, testimonies, teasers] = await Promise.all([
+  const [profile, highlights, testimonies, teasers, scriptureBands] = await Promise.all([
     getOrganizationProfile(),
     getMissionHighlights(),
     getTestimonies(),
     getHomePostTeasers(2),
+    getScriptureBannersForHome(),
   ]);
+
+  const [band1, band2, band3, band4] = scriptureBands.slice(0, 4);
 
   return (
     <>
       <HeroPrimarySection profile={profile} />
-      <ScriptureHeroSection
-        id="scripture-jesus-is-truth"
-        reference="John 14:6"
-        tone="light"
-      >
-        I am the way, and the truth, and the life. No one comes to the Father
-        except through me.
-      </ScriptureHeroSection>
+      {band1 ? (
+        <ScriptureHeroSection
+          id={band1.anchor_slug}
+          reference={band1.reference}
+          tone={band1.tone}
+          translationNote={band1.translation_note}
+        >
+          {band1.body}
+        </ScriptureHeroSection>
+      ) : null}
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-14 sm:gap-20 sm:px-6 sm:py-20">
         <HeroImpactSection />
       </div>
-      <ScriptureHeroSection
-        id="scripture-truth-sets-free"
-        reference="John 8:32"
-        tone="deep"
-      >
-        You will know the truth, and the truth will set you free.
-      </ScriptureHeroSection>
+      {band2 ? (
+        <ScriptureHeroSection
+          id={band2.anchor_slug}
+          reference={band2.reference}
+          tone={band2.tone}
+          translationNote={band2.translation_note}
+        >
+          {band2.body}
+        </ScriptureHeroSection>
+      ) : null}
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-14 sm:gap-20 sm:px-6 sm:py-20">
         <MissionVisionSection profile={profile} />
       </div>
-      <ScriptureHeroSection
-        id="scripture-abide-and-fruit"
-        reference="John 15:5"
-        tone="light"
-      >
-        I am the vine; you are the branches. Whoever abides in me and I in him,
-        he it is that bears much fruit, for apart from me you can do nothing.
-      </ScriptureHeroSection>
+      {band3 ? (
+        <ScriptureHeroSection
+          id={band3.anchor_slug}
+          reference={band3.reference}
+          tone={band3.tone}
+          translationNote={band3.translation_note}
+        >
+          {band3.body}
+        </ScriptureHeroSection>
+      ) : null}
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-14 sm:gap-20 sm:px-6 sm:py-20">
         <HighlightsSection highlights={highlights} />
       </div>
-      <ScriptureHeroSection
-        id="scripture-fruit-of-the-spirit"
-        reference="Galatians 5:22–23"
-        tone="deep"
-      >
-        The fruit of the Spirit is love, joy, peace, patience, kindness,
-        goodness, faithfulness, gentleness, self-control; against such things
-        there is no law.
-      </ScriptureHeroSection>
+      {band4 ? (
+        <ScriptureHeroSection
+          id={band4.anchor_slug}
+          reference={band4.reference}
+          tone={band4.tone}
+          translationNote={band4.translation_note}
+        >
+          {band4.body}
+        </ScriptureHeroSection>
+      ) : null}
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-14 sm:gap-20 sm:px-6 sm:py-20">
         <TestimoniesSection testimonies={testimonies} />
         <UpdatesTeaserSection posts={teasers} />

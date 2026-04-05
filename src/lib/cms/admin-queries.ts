@@ -6,6 +6,7 @@ type Highlight = Database["public"]["Tables"]["mission_highlights"]["Row"];
 type Testimony = Database["public"]["Tables"]["testimonies"]["Row"];
 type Contact = Database["public"]["Tables"]["contact_submissions"]["Row"];
 type OrgProfile = Database["public"]["Tables"]["organization_profile"]["Row"];
+type ScriptureBanner = Database["public"]["Tables"]["scripture_banners"]["Row"];
 
 export async function getOrganizationProfileRow(): Promise<OrgProfile | null> {
   const supabase = await createClient();
@@ -78,4 +79,23 @@ export async function getContactSubmissions(limit = 100): Promise<Contact[]> {
     .order("created_at", { ascending: false })
     .limit(limit);
   return data ?? [];
+}
+
+export async function getAllScriptures(): Promise<ScriptureBanner[]> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("scripture_banners")
+    .select("*")
+    .order("sort_order", { ascending: true });
+  return data ?? [];
+}
+
+export async function getScriptureById(id: string): Promise<ScriptureBanner | null> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("scripture_banners")
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
+  return data;
 }

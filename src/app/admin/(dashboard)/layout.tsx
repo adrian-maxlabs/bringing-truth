@@ -14,6 +14,7 @@ const links = [
   { href: "/admin/posts", label: "Posts" },
   { href: "/admin/highlights", label: "Highlights" },
   { href: "/admin/testimonies", label: "Testimonies" },
+  { href: "/admin/scriptures", label: "Scripture" },
   { href: "/admin/contacts", label: "Contacts" },
 ] as const;
 
