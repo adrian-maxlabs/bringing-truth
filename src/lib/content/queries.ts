@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { createStaticClient } from "@/lib/supabase/static";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import {
   demoHighlights,
@@ -139,4 +140,29 @@ export async function getScriptureBannersForHome(): Promise<ScriptureBanner[]> {
   }
 
   return data ?? [];
+}
+
+/**
+ * Cookie-free variant of getPublishedPosts for build-time contexts
+ * (generateStaticParams) where `cookies()` is unavailable.
+ */
+export async function getPublishedPostSlugs(): Promise<{ slug: string }[]> {
+  if (!isSupabaseConfigured()) {
+    return demoPosts.map((p) => ({ slug: p.slug }));
+  }
+
+  const supabase = createStaticClient();
+  const { data, error } = await supabase
+    .from("posts")
+    .select("slug")
+    .eq("status", "published")
+    .not("published_at", "is", null)
+    .lte("published_at", new Date().toISOString())
+    .order("published_at", { ascending: false });
+
+  if (error || !data?.length) {
+    return demoPosts.map((p) => ({ slug: p.slug }));
+  }
+
+  return data;
 }

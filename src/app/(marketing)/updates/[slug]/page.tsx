@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PostBody } from "@/features/marketing/sections";
-import { getPostBySlug, getPublishedPosts } from "@/lib/content/queries";
+import { getPostBySlug, getPublishedPostSlugs } from "@/lib/content/queries";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -19,8 +19,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const posts = await getPublishedPosts(100);
-  return posts.map((p) => ({ slug: p.slug }));
+  return getPublishedPostSlugs();
 }
 
 function formatDate(iso: string | null) {
