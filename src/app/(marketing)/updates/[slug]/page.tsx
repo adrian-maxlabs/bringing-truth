@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { PostBody } from "@/features/marketing/sections";
 import { getPostBySlug } from "@/lib/content/queries";
 
+export const dynamic = "force-dynamic";
+
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
