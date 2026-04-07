@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PostBody } from "@/features/marketing/sections";
-import { getPostBySlug, getPublishedPostSlugs } from "@/lib/content/queries";
+import { getPostBySlug } from "@/lib/content/queries";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -16,10 +16,6 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     title: post.title,
     description: post.excerpt || undefined,
   };
-}
-
-export async function generateStaticParams() {
-  return getPublishedPostSlugs();
 }
 
 function formatDate(iso: string | null) {
