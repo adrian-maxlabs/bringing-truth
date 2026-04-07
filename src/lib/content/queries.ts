@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createAnonClient } from "@/lib/supabase/anon";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import {
   demoHighlights,
@@ -20,7 +20,7 @@ export async function getOrganizationProfile(): Promise<Profile> {
     return demoOrganizationProfile;
   }
 
-  const supabase = await createClient();
+  const supabase = createAnonClient();
   const { data, error } = await supabase
     .from("organization_profile")
     .select("*")
@@ -39,7 +39,7 @@ export async function getPublishedPosts(limit = 20): Promise<Post[]> {
     return demoPosts.slice(0, limit);
   }
 
-  const supabase = await createClient();
+  const supabase = createAnonClient();
   const { data, error } = await supabase
     .from("posts")
     .select("*")
@@ -61,7 +61,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     return demoPosts.find((p) => p.slug === slug) ?? null;
   }
 
-  const supabase = await createClient();
+  const supabase = createAnonClient();
   const { data, error } = await supabase
     .from("posts")
     .select("*")
@@ -83,7 +83,7 @@ export async function getMissionHighlights(): Promise<Highlight[]> {
     return demoHighlights;
   }
 
-  const supabase = await createClient();
+  const supabase = createAnonClient();
   const { data, error } = await supabase
     .from("mission_highlights")
     .select("*")
@@ -102,7 +102,7 @@ export async function getTestimonies(): Promise<Testimony[]> {
     return demoTestimonies;
   }
 
-  const supabase = await createClient();
+  const supabase = createAnonClient();
   const { data, error } = await supabase
     .from("testimonies")
     .select("*")
@@ -127,7 +127,7 @@ export async function getScriptureBannersForHome(): Promise<ScriptureBanner[]> {
     return demoScriptureBanners;
   }
 
-  const supabase = await createClient();
+  const supabase = createAnonClient();
   const { data, error } = await supabase
     .from("scripture_banners")
     .select("*")
