@@ -8,10 +8,12 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto w-full max-w-lg px-4 py-12 sm:px-6 sm:py-16">
+    <div className="mx-auto w-full max-w-lg px-4 py-10 sm:px-6 sm:py-16">
       <header className="mb-8 space-y-3">
-        <h1 className="text-4xl font-semibold tracking-tight">Contact</h1>
-        <p className="text-lg leading-[1.65] text-muted-foreground">
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          Contact
+        </h1>
+        <p className="text-base leading-[1.65] text-muted-foreground sm:text-lg">
           Send a message — we read every note and will respond as soon as we can.
         </p>
       </header>

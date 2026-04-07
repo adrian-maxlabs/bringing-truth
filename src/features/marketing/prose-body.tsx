@@ -14,7 +14,7 @@ export function ProseBody({ text }: { text: string }) {
           return (
             <h2
               key={i}
-              className="mt-8 mb-3 text-2xl font-semibold tracking-tight first:mt-0"
+              className="mt-8 mb-3 text-xl font-semibold tracking-tight first:mt-0 sm:text-2xl"
             >
               {first.slice(2).trim()}
             </h2>
@@ -29,7 +29,7 @@ export function ProseBody({ text }: { text: string }) {
           return (
             <blockquote
               key={i}
-              className="border-l-4 border-primary/40 pl-4 text-lg italic leading-[1.65] text-muted-foreground"
+              className="border-l-4 border-primary/40 pl-4 text-base italic leading-[1.65] text-muted-foreground sm:text-lg"
             >
               {quote}
             </blockquote>
@@ -42,7 +42,7 @@ export function ProseBody({ text }: { text: string }) {
         return (
           <p
             key={i}
-            className="mb-4 text-lg leading-[1.7] text-muted-foreground"
+            className="mb-4 text-base leading-[1.7] text-muted-foreground sm:text-lg"
           >
             {paragraph}
           </p>

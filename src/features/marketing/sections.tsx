@@ -65,12 +65,12 @@ export function HeroPrimarySection({ profile }: { profile: Profile }) {
           <p className="text-pretty text-lg leading-[1.65] text-muted-foreground sm:text-xl sm:leading-[1.65]">
             {profile.hero_subtitle}
           </p>
-          <div className="flex flex-wrap gap-3 pt-2">
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
             <Link
               href="/updates"
               className={cn(
                 buttonVariants({ variant: "default", size: "lg" }),
-                "gap-2 shadow-md"
+                "w-full justify-center gap-2 shadow-md sm:w-auto"
               )}
             >
               Read updates
@@ -80,7 +80,7 @@ export function HeroPrimarySection({ profile }: { profile: Profile }) {
               href="/contact"
               className={cn(
                 buttonVariants({ variant: "secondary", size: "lg" }),
-                "gap-2 border border-border/80 bg-background/80 backdrop-blur-sm"
+                "w-full justify-center gap-2 border border-border/80 bg-background/80 backdrop-blur-sm sm:w-auto"
               )}
             >
               <Mail className="size-4" />
@@ -302,9 +302,9 @@ export function TestimoniesSection({
           return (
             <li
               key={t.id}
-              className="flex gap-5 rounded-2xl border border-border bg-gradient-to-br from-muted/30 to-card p-6 shadow-sm sm:p-7"
+              className="flex flex-col gap-4 rounded-2xl border border-border bg-gradient-to-br from-muted/30 to-card p-6 shadow-sm sm:flex-row sm:gap-5 sm:p-7"
             >
-              <div className="relative size-16 shrink-0 overflow-hidden rounded-full border-2 border-background shadow-md sm:size-20">
+              <div className="relative mx-auto size-16 shrink-0 overflow-hidden rounded-full border-2 border-background shadow-md sm:mx-0 sm:size-20">
                 <Image
                   src={src}
                   alt={showAlt}
@@ -313,7 +313,7 @@ export function TestimoniesSection({
                   className={imgFillCover}
                 />
               </div>
-              <div className="min-w-0 flex-1">
+              <div className="min-w-0 flex-1 text-center sm:text-left">
                 <blockquote className="text-pretty text-base italic leading-[1.65] text-foreground/90">
                   &ldquo;{t.body}&rdquo;
                 </blockquote>
@@ -458,7 +458,7 @@ export function ContactTeaserSection() {
           href="/contact"
           className={cn(
             buttonVariants({ size: "lg" }),
-            "shrink-0 shadow-md"
+            "w-full shrink-0 justify-center shadow-md sm:w-auto"
           )}
         >
           Contact

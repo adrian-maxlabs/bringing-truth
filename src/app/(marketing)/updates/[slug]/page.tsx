@@ -35,22 +35,24 @@ export default async function UpdateDetailPage(props: Props) {
   }
 
   return (
-    <article className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-      <p className="text-base text-muted-foreground">
+    <article className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-6 sm:py-16">
+      <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground sm:text-base">
         <Link
           href="/updates"
           className="font-medium text-foreground hover:underline"
         >
           ← All updates
         </Link>
-        <span className="mx-2 text-border">·</span>
-        {formatDate(post.published_at)}
+        <span className="text-border" aria-hidden>
+          ·
+        </span>
+        <span>{formatDate(post.published_at)}</span>
       </p>
-      <h1 className="mt-4 text-balance text-4xl font-semibold tracking-tight sm:text-[2.5rem] sm:leading-tight">
+      <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-[2.5rem] sm:leading-tight">
         {post.title}
       </h1>
       {post.excerpt ? (
-        <p className="mt-4 text-xl leading-[1.65] text-muted-foreground">
+        <p className="mt-4 text-lg leading-[1.65] text-muted-foreground sm:text-xl">
           {post.excerpt}
         </p>
       ) : null}

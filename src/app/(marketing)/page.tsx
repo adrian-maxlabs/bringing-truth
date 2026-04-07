@@ -40,7 +40,7 @@ export default async function HomePage() {
           {band1.body}
         </ScriptureHeroSection>
       ) : null}
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-14 sm:gap-20 sm:px-6 sm:py-20">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 py-12 sm:gap-20 sm:px-6 sm:py-20">
         <HeroImpactSection />
       </div>
       {band2 ? (
@@ -53,7 +53,7 @@ export default async function HomePage() {
           {band2.body}
         </ScriptureHeroSection>
       ) : null}
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-14 sm:gap-20 sm:px-6 sm:py-20">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 py-12 sm:gap-20 sm:px-6 sm:py-20">
         <MissionVisionSection profile={profile} />
       </div>
       {band3 ? (
@@ -66,7 +66,7 @@ export default async function HomePage() {
           {band3.body}
         </ScriptureHeroSection>
       ) : null}
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-14 sm:gap-20 sm:px-6 sm:py-20">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 py-12 sm:gap-20 sm:px-6 sm:py-20">
         <HighlightsSection highlights={highlights} />
       </div>
       {band4 ? (
@@ -79,7 +79,7 @@ export default async function HomePage() {
           {band4.body}
         </ScriptureHeroSection>
       ) : null}
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-14 sm:gap-20 sm:px-6 sm:py-20">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 py-12 sm:gap-20 sm:px-6 sm:py-20">
         <TestimoniesSection testimonies={testimonies} />
         <UpdatesTeaserSection posts={teasers} />
         <ContactTeaserSection />

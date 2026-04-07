@@ -31,7 +31,7 @@ export function ContactForm() {
           type="text"
           autoComplete="name"
           required
-          className="w-full rounded-lg border border-input bg-background px-3 py-2.5 text-base leading-normal outline-none ring-offset-background transition-shadow focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          className="w-full rounded-lg border border-input bg-background px-3 py-3 text-base leading-normal outline-none ring-offset-background transition-shadow focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:py-2.5"
           aria-invalid={state.fieldErrors?.name ? true : undefined}
         />
         {state.fieldErrors?.name ? (
@@ -48,7 +48,7 @@ export function ContactForm() {
           type="email"
           autoComplete="email"
           required
-          className="w-full rounded-lg border border-input bg-background px-3 py-2.5 text-base leading-normal outline-none ring-offset-background transition-shadow focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          className="w-full rounded-lg border border-input bg-background px-3 py-3 text-base leading-normal outline-none ring-offset-background transition-shadow focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:py-2.5"
           aria-invalid={state.fieldErrors?.email ? true : undefined}
         />
         {state.fieldErrors?.email ? (
@@ -64,7 +64,7 @@ export function ContactForm() {
           name="message"
           rows={6}
           required
-          className="w-full resize-y rounded-lg border border-input bg-background px-3 py-2.5 text-base leading-[1.55] outline-none ring-offset-background transition-shadow focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          className="w-full resize-y rounded-lg border border-input bg-background px-3 py-3 text-base leading-[1.55] outline-none ring-offset-background transition-shadow focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:py-2.5"
           aria-invalid={state.fieldErrors?.message ? true : undefined}
         />
         {state.fieldErrors?.message ? (
@@ -77,7 +77,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex h-10 items-center justify-center rounded-lg bg-primary px-5 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/85 disabled:pointer-events-none disabled:opacity-50 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+        className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-primary px-5 text-base font-medium text-primary-foreground transition-colors hover:bg-primary/85 disabled:pointer-events-none disabled:opacity-50 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:h-10 sm:w-auto"
       >
         {pending ? "Sending…" : "Send message"}
       </button>

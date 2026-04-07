@@ -21,10 +21,12 @@ export default async function UpdatesPage() {
   const posts = await getPublishedPosts(50);
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+    <div className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 sm:py-16">
       <header className="mb-10 space-y-3">
-        <h1 className="text-4xl font-semibold tracking-tight">Updates</h1>
-        <p className="max-w-2xl text-lg leading-[1.65] text-muted-foreground">
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          Updates
+        </h1>
+        <p className="max-w-2xl text-base leading-[1.65] text-muted-foreground sm:text-lg">
           News from the field, prayer requests, and how your support makes a
           difference.
         </p>
